@@ -5,7 +5,7 @@ If you add "playlist" at the beginning of a line, the script will ask you if you
 All files downloaded will be placed in a new folder in your cwd (the folder in which is the script).
 
 # Requirements
-* An API youtube v3 key without login
+* [An API youtube v3 key without login](https://developers.google.com/youtube/registering_an_application)
 * google-api-python-client and youtube_dl modules (type the command ``python -m pip install google-api-python-client`` then ``python -m pip install youtube_dl``in your terminal)
 * a file named  text_file.txt in the same folder as the python file
 
