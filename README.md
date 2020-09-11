@@ -6,11 +6,10 @@ All files downloaded will be placed in a new folder in your cwd (the folder in w
 
 # Requirements
 * An API youtube v3 key without login
-* google-api-python-client and youtube_dl modules (type the command ``python -m pip install google-api-python-client`` then ``python -m pip install youtube_dl``
-* a file named  text_file.txt in the same folder
+* google-api-python-client and youtube_dl modules (type the command ``python -m pip install google-api-python-client`` then ``python -m pip install youtube_dl``in your terminal)
+* a file named  text_file.txt in the same folder as the python file
 
 # Example of a text_file.txt correctly written
-``
-playlist Royal Republic - Club Majesty``
-``chef dumas Burger au fromage bleu``
 
+playlist Royal Republic - Club Majesty
+chef dumas Burger au fromage bleu
