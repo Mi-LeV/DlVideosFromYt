@@ -12,4 +12,5 @@ All files downloaded will be placed in a new folder in your cwd (the folder in w
 # Example of a text_file.txt correctly written
 
 playlist Royal Republic - Club Majesty
+
 chef dumas Burger au fromage bleu
