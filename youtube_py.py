@@ -44,11 +44,12 @@ def search_playlists(word):
 def search_vids_n_playls(word_list):
     urls = []
     for word in word_list:
-        if "playlist" in word:
-            urls += search_playlists(word[word.find("playlist")+8::])
-        else:
-            urls.append(search_vid(word))
-    return(urls)
+            if word:
+            if "playlist" in word:
+                urls += search_playlists(word[word.find("playlist")+8::])
+            else:
+                urls.append(search_vid(word))
+        return(urls)
 
 def create_folder(folder_name):
     cwd = os.getcwd()
