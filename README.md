@@ -1,1 +1,16 @@
 # DlMusicFromYt
+This is a script which allows you to download a high number of music from youtube for free.
+You just have to have the text_file.txt in the same folder, and to write in it titles of videos you want from youtube (line by line), and the script will search for them on youtube, and download them.
+If you add "playlist" at the beginning of a line, the script will ask you if you want to the dl the playlist it found, and then dl the vids from the playlist (the youtube api sets the limit to 50 videos per playlist).
+All files downloaded will be placed in a new folder in your cwd (the folder in which is the script).
+
+# Requirements
+* An API youtube v3 key without login
+* google-api-python-client and youtube_dl modules (type the command ``python -m pip install google-api-python-client`` then ``python -m pip install youtube_dl``
+* a file named  text_file.txt in the same folder
+
+# Example of a text_file.txt correctly written
+``
+playlist Royal Republic - Club Majesty
+chef dumas Burger au fromage bleu
+``
