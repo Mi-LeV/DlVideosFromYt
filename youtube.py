@@ -57,7 +57,7 @@ def create_folder(folder_name):
         os.mkdir(cwd+'\\'+ folder_name)
     os.chdir(cwd+'\\'+ folder_name)
 
-txt = open("music_list.txt","r")
+txt = open("titles.txt","r")
 word_list = list_from_txt(txt)
 youtube = build('youtube', 'v3', developerKey=api_youtube)
 urls = search_vids_n_playls(word_list)
