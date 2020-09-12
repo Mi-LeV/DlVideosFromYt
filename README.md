@@ -21,4 +21,4 @@ Right now, you can only download mp3 in 256kBs (which is pretty good).
 * google-api-python-client and youtube_dl modules (type the command ``python -m pip install google-api-python-client`` then ``python -m pip install youtube_dl``in your terminal)
 * a file named  text_file.txt in the same folder as the python file
 
-There is an example of a text_file.txt correctly written on this git
+There is an example of a text_file.txt correctly written in this git.
