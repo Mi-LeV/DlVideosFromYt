@@ -12,7 +12,7 @@ The script will :
 * Read the txt file line by line and take a line as a title of video or of a playlist (if there is the keyword playlist as the beginning in it).
 * search titles of videos on youtube, and download them.
 * search for titles of playlists on youtube, then download all videos in the playlist found.
-All downloaded files will be placed in a new folder in your cwd (the folder in which is the yoitube.py executed).
+* Convert theses videos in mp3 in a new folder in your cwd (the folder in which is the youtube.py executed).
 
 Right now, you can only download mp3 in 256kBs (which is pretty good).
 
