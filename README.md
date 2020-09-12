@@ -2,9 +2,10 @@
 __WARNING : do NOT download music you don't own or which is not free-to-use__
 
 This is a script which allows you to download a high number of mp3 from  youtube videos.
+No need to have the URLs, the script will search the videos and playlists by searching them.
 # How does it works ?
 
-* Open a text file named text_file.txt in the same folder.
+* Open a text file named titles.txt in the same folder.
 * Write in it the titles of the videos you want from youtube (1 by line). If you add "playlist" at the beginning of a line, then the script will search for playlists.
 * Then execute youtube.py
 
@@ -21,4 +22,4 @@ For now, you can only download mp3 in 256kBs (which is pretty good).
 * google-api-python-client and youtube_dl modules (type the command ``python -m pip install google-api-python-client`` then ``python -m pip install youtube_dl``in your terminal)
 * a file named  text_file.txt in the same folder as the python file
 
-There is an example of a text_file.txt correctly written in this git.
+There is an example of a titles.txt correctly written in this git.
