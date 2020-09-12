@@ -1,4 +1,5 @@
 # DlMusicFromYt
+__WARNING : do NOT download music you don't own or whoch is not free-to-use__
 This is a script which allows you to download a high number of music from youtube for free.
 You just have to have the text_file.txt in the same folder, and to write in it titles of videos you want from youtube (line by line), and the script will search for them on youtube, and download them.
 If you add "playlist" at the beginning of a line, the script will ask you if you want to the dl the playlist it found, and then dl the vids from the playlist (the youtube api sets the limit to 50 videos per playlist).
