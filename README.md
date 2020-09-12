@@ -1,11 +1,11 @@
 # DlMusicFromYt
-__WARNING : do NOT download music you don't own or whoch is not free-to-use__
+__WARNING : do NOT download music you don't own or which is not free-to-use__
 
 This is a script which allows you to download a high number of mp3 from  youtube videos.
 # How does it works ?
 
 * Open a text file named text_file.txt in the same folder.
-* Write in it titles of videos you want from youtube (1 by line). If you add "playlist" at the beginning of a line, then the script will search for playlists.
+* Write in it the titles of the videos you want from youtube (1 by line). If you add "playlist" at the beginning of a line, then the script will search for playlists.
 * Then execute youtube.py
 
 The script will :
