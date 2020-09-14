@@ -12,7 +12,7 @@ No need to have the URLs, the script will search the videos and playlists by sea
 The script will :
 * Read the txt file line by line and take a line as a title of a video or of a playlist (if there is the keyword playlist as the beginning in it).
 * search titles of videos on youtube and download them.
-* search for titles of playlists on youtube then download all the videos in the playlist found.
+* search for titles of playlists on youtube then download all the videos in the playlist found (Youtube sets a limit to 50 videos in a playlist).
 * Convert theses videos in a new folder in your cwd (the folder in which is the youtube.py executed).
 
 You can download videos in mp3, m4a, flv, webm, and mp4 in 1080,720,480,360,240,144p.
