@@ -13,12 +13,13 @@ The script will :
 * Read the txt file line by line and take a line as a title of a video or of a playlist (if there is the keyword playlist as the beginning in it).
 * search titles of videos on youtube and download them.
 * search for titles of playlists on youtube then download all the videos in the playlist found.
-* Convert theses videos in mp3 in a new folder in your cwd (the folder in which is the youtube.py executed).
+* Convert theses videos in a new folder in your cwd (the folder in which is the youtube.py executed).
 
-For now, you can only download mp3 in 256kBs (which is pretty good).
+You can download videos in mp3, m4a, flv, webm, and mp4 in 1080,720,480,360,240,144p.
 
 # Requirements
 * [An API youtube v3 key without login](https://developers.google.com/youtube/registering_an_application)
+  (the api key already in the code will not work)
 * google-api-python-client and youtube_dl modules (type the command ``python -m pip install google-api-python-client`` then ``python -m pip install youtube_dl``in your terminal)
 * a file named  text_file.txt in the same folder as the python file
 
