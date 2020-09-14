@@ -82,7 +82,7 @@ def my_hook(d):
         print('Done downloading, now converting ...')
 
 
-ydl_opts = {
+ydl_mp3 = {
     'format': 'bestaudio/best',
     'postprocessors': [{
         'key': 'FFmpegExtractAudio',
@@ -90,10 +90,33 @@ ydl_opts = {
         'preferredquality': '256',
     }],
     'logger': MyLogger(),
-    'progress_hooks': [my_hook],
+    'progress_hooks': [my_hook]
 }
+ydl_flv = {'format':'5','logger': MyLogger(),'progress_hooks': [my_hook]}
+ydl_m4a = {'format':'140','logger': MyLogger(),'progress_hooks': [my_hook]}
 
-with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+ydl_webm = {'format':'43','logger': MyLogger(),'progress_hooks': [my_hook]}
+ydl_vid1080 = {'format':'137','logger': MyLogger(),'progress_hooks': [my_hook]}
+ydl_vid720 = {'format':'136','logger': MyLogger(),'progress_hooks': [my_hook]}
+ydl_vid480 = {'format':'135','logger': MyLogger(),'progress_hooks': [my_hook]}
+ydl_vid360 = {'format':'134','logger': MyLogger(),'progress_hooks': [my_hook]}
+ydl_vid240 = {'format':'133','logger': MyLogger(),'progress_hooks': [my_hook]}
+ydl_vid144 = {'format':'160','logger': MyLogger(),'progress_hooks': [my_hook]}
+
+format_dict={'mp3':ydl_mp3,'flv':ydl_flv,'m4a':ydl_m4a,'webm':ydl_webm,'mp4_1080':ydl_vid1080,'mp4_720':ydl_vid720,'mp4_480':ydl_vid480,'mp4_360':ydl_vid360\
+    ,'mp4_240':ydl_vid240,'mp4_144':ydl_vid144}
+
+dl_format = ""
+while not dl_format:
+    dl_format = input("Pick a format {mp3,flv,m4a,webm,mp4_1080,mp4_720,mp4_480,mp4_360,mp4_240,mp4_144} : ")
+    if not dl_format in format_dict:
+        print("Invalid input. Please pick a valuable format")
+        dl_format=""
+
+
+
+
+with youtube_dl.YoutubeDL(ydl_vid144) as ydl:
     try:
         ydl.download(urls)
     except:pass
