@@ -44,18 +44,19 @@ def search_playlists(word):
 def search_vids_n_playls(word_list):
     urls = []
     for word in word_list:
-            if word:
+        if word:
             if "playlist" in word:
                 urls += search_playlists(word[word.find("playlist")+8::])
             else:
                 urls.append(search_vid(word))
-        return(urls)
+    return(urls)
 
 def create_folder(folder_name):
     cwd = os.getcwd()
-    if not os .path.isdir(cwd+'\\'+ folder_name):
-        os.mkdir(cwd+'\\'+ folder_name)
-    os.chdir(cwd+'\\'+ folder_name)
+    new_dir = os.path.join(cwd,folder_name)
+    if not os.path.isdir(new_dir):
+        os.mkdir(new_dir)
+    os.chdir(new_dir)
 
 txt = open("titles.txt","r")
 word_list = list_from_txt(txt)
