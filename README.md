@@ -15,7 +15,7 @@ The script will :
 * search for titles of playlists on youtube then download all the videos in the playlist found (Youtube sets a limit to 50 videos in a playlist).
 * Convert theses videos in a new folder in your cwd (the folder in which is the youtube.py executed).
 
-You can download videos in mp3, m4a, flv, webm, and mp4 in 1080,720,480,360,240,144p.
+You can download videos in mp3, m4a, flv, mkv, and mp4.
 
 # Requirements
 * [An API youtube v3 key without login](https://developers.google.com/youtube/registering_an_application)
