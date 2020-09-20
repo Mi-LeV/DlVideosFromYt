@@ -19,7 +19,7 @@ def list_from_txt(txt_file):
 
 
 def search_vid(word):
-    request = youtube.search().list(q=word, part='snippet', order='viewCount', maxResults=1, type='video')
+    request = youtube.search().list(q=word, part='snippet', maxResults=1, type='video')
     response = request.execute()
     searched_vid = "https://www.youtube.com/watch?v=" + response['items'][0]['id']['videoId']
     return searched_vid
@@ -92,23 +92,19 @@ ydl_mp3 = {
     'logger': MyLogger(),
     'progress_hooks': [my_hook]
 }
-ydl_flv = {'format':'5','logger': MyLogger(),'progress_hooks': [my_hook]}
+ydl_flv = {'format': 'bestvideo[ext=flv]+bestaudio[ext=m4a]/best[ext=flv]/best'}
 ydl_m4a = {'format':'140','logger': MyLogger(),'progress_hooks': [my_hook]}
 
-ydl_webm = {'format':'43','logger': MyLogger(),'progress_hooks': [my_hook]}
-ydl_vid1080 = {'format':'137','logger': MyLogger(),'progress_hooks': [my_hook]}
-ydl_vid720 = {'format':'136','logger': MyLogger(),'progress_hooks': [my_hook]}
-ydl_vid480 = {'format':'135','logger': MyLogger(),'progress_hooks': [my_hook]}
-ydl_vid360 = {'format':'134','logger': MyLogger(),'progress_hooks': [my_hook]}
-ydl_vid240 = {'format':'133','logger': MyLogger(),'progress_hooks': [my_hook]}
-ydl_vid144 = {'format':'160','logger': MyLogger(),'progress_hooks': [my_hook]}
+ydl_mkv = {'format': 'bestvideo+bestaudio/best'}
+ydl_mp4 = {
+    'format': 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best',
+}
 
-format_dict={'mp3':ydl_mp3,'flv':ydl_flv,'m4a':ydl_m4a,'webm':ydl_webm,'mp4_1080':ydl_vid1080,'mp4_720':ydl_vid720,'mp4_480':ydl_vid480,'mp4_360':ydl_vid360\
-    ,'mp4_240':ydl_vid240,'mp4_144':ydl_vid144}
+format_dict={'mp3':ydl_mp3,'flv':ydl_flv,'m4a':ydl_m4a,'mkv':ydl_mkv,'mp4':ydl_mp4}
 
 dl_format = ""
 while not dl_format:
-    dl_format = input("Pick a format {mp3,flv,m4a,webm,mp4_1080,mp4_720,mp4_480,mp4_360,mp4_240,mp4_144} : ")
+    dl_format = input("Pick a format {mp3,m4a,mkv,flv,mp4} : ")
     if not dl_format in format_dict:
         print("Invalid input. Please pick a valuable format")
         dl_format=""
@@ -116,7 +112,7 @@ while not dl_format:
 
 
 
-with youtube_dl.YoutubeDL(ydl_vid144) as ydl:
+with youtube_dl.YoutubeDL(format_dict[dl_format]) as ydl:
     try:
         ydl.download(urls)
     except:pass
