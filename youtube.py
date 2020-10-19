@@ -116,7 +116,7 @@ while not dl_format:
 
 
 
-with youtube_dl.YoutubeDL(ydl_vid144) as ydl:
+with youtube_dl.YoutubeDL(format_dict[dl_format]) as ydl:
     try:
         ydl.download(urls)
     except:pass
