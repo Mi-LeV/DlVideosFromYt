@@ -4,7 +4,7 @@ import requests
 import youtube_dl
 from googleapiclient.discovery import build
 
-api_key = 'AIzaSyDXgMiUhVLW4Ls0dDnKAm_sOXc4gzRK7aQ'
+api_key = ''
 folder_name = 'music'
 
 ydl_mp3 = {
