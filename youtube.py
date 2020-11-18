@@ -4,52 +4,66 @@ import requests
 import youtube_dl
 from googleapiclient.discovery import build
 
-api_youtube = 'AIzaSyDBeZ638MVWKqmi2z8ONN-EvU6Kmrtxwoc'
-folder_name = 'musique'
+api_key = 'AIzaSyDXgMiUhVLW4Ls0dDnKAm_sOXc4gzRK7aQ'
+folder_name = 'music'
 
+ydl_mp3 = {
+    'format': 'bestaudio/best',
+    'postprocessors': [{
+        'key': 'FFmpegExtractAudio',
+        'preferredcodec': 'mp3',
+        'preferredquality': '256',
+    }]
+}
+ydl_m4a = {
+    'format': 'bestaudio/best',
+    'postprocessors': [{
+        'key': 'FFmpegExtractAudio',
+        'preferredcodec': 'm4a',
+        'preferredquality': '256',
+    }]
+}
+ydl_wav = {
+    'format': 'bestaudio/best',
+    'postprocessors': [{
+        'key': 'FFmpegExtractAudio',
+        'preferredcodec': 'wav',
+        'preferredquality': '256',
+    }]
+}
+ydl_mp4 = {
+    'format': 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best'
+}
 
-def list_from_txt(txt_file):
-    word_list = []
-    lines = len(txt_file.readlines())
-    txt_file.seek(0)
-    for line in range(lines):
-        word_list.append(txt_file.readline())
-    return word_list
-
+format_dict={'mp3':ydl_mp3,'m4a':ydl_m4a,'wav':ydl_wav,'mp4':ydl_mp4}
 
 
 def search_vid(word):
     request = youtube.search().list(q=word, part='snippet', order='viewCount', maxResults=1, type='video')
     response = request.execute()
     searched_vid = "https://www.youtube.com/watch?v=" + response['items'][0]['id']['videoId']
-    return searched_vid
+    print("Download " + searched_vid + response['items'][0]['snippet']['title'])
+    return [searched_vid]
 
 def search_playlists(word):
     url_list = []
     request = youtube.search().list(q=word, part='snippet', maxResults=1, type='playlist')
     response = request.execute()
     searched_playl = response['items'][0]['id']['playlistId']
-    accept = input("download playlist ? https://www.youtube.com/playlist?list="+searched_playl+" : y or n\n")
-    if accept == 'y':
-        print("download playlist https://www.youtube.com/playlist?list="+searched_playl)
-        request = youtube.playlistItems().list(part='snippet', playlistId=searched_playl, maxResults=20)
-        response = request.execute()
-        for video in response['items']:
-            vid_url = "https://www.youtube.com/watch?v=" + video['snippet']['resourceId']['videoId']
-            url_list.append(vid_url)
-    else:
-        print("download cancelled")
+    request = youtube.playlistItems().list(part='snippet', playlistId=searched_playl, maxResults=20)
+    response = request.execute()
+    for video in response['items']:
+        vid_url = "https://www.youtube.com/watch?v=" + video['snippet']['resourceId']['videoId']
+        url_list.append(vid_url)
+    print(response)
+    print("Download https://www.youtube.com/playlist?list=" + searched_playl + response['items'][0]['snippet']['title'])
     return url_list
 
-def search_vids_n_playls(word_list):
-    urls = []
-    for word in word_list:
-        if word:
-            if "playlist" in word:
-                urls += search_playlists(word[word.find("playlist")+8::])
-            else:
-                urls.append(search_vid(word))
-    return(urls)
+def search_vids_n_playls(line):
+    if "playlist" in line:
+        return search_playlists(line[line.find("playlist")+8::])
+    else:
+        return search_vid(line)
 
 def create_folder(folder_name):
     cwd = os.getcwd()
@@ -58,65 +72,30 @@ def create_folder(folder_name):
         os.mkdir(new_dir)
     os.chdir(new_dir)
 
-txt = open("titles.txt","r")
-word_list = list_from_txt(txt)
-youtube = build('youtube', 'v3', developerKey=api_youtube)
-urls = search_vids_n_playls(word_list)
-for url in urls:
-    print("download " + url)
-create_folder(folder_name)
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
+line = input("Search for title of a vid, or a playlist: ")
 
-class MyLogger(object):
-    def debug(self, msg):
-        pass
+while not line == "":
+    youtube = build('youtube', 'v3', developerKey=api_key)
+    urls = search_vids_n_playls(line)
+    create_folder(folder_name)
 
-    def warning(self, msg):
-        pass
-
-    def error(self, msg):
-        print(msg)
-
-def my_hook(d):
-    if d['status'] == 'finished':
-        print('Done downloading, now converting ...')
-
-
-ydl_mp3 = {
-    'format': 'bestaudio/best',
-    'postprocessors': [{
-        'key': 'FFmpegExtractAudio',
-        'preferredcodec': 'mp3',
-        'preferredquality': '256',
-    }],
-    'logger': MyLogger(),
-    'progress_hooks': [my_hook]
-}
-ydl_flv = {'format':'5','logger': MyLogger(),'progress_hooks': [my_hook]}
-ydl_m4a = {'format':'140','logger': MyLogger(),'progress_hooks': [my_hook]}
-
-ydl_webm = {'format':'43','logger': MyLogger(),'progress_hooks': [my_hook]}
-ydl_vid1080 = {'format':'137','logger': MyLogger(),'progress_hooks': [my_hook]}
-ydl_vid720 = {'format':'136','logger': MyLogger(),'progress_hooks': [my_hook]}
-ydl_vid480 = {'format':'135','logger': MyLogger(),'progress_hooks': [my_hook]}
-ydl_vid360 = {'format':'134','logger': MyLogger(),'progress_hooks': [my_hook]}
-ydl_vid240 = {'format':'133','logger': MyLogger(),'progress_hooks': [my_hook]}
-ydl_vid144 = {'format':'160','logger': MyLogger(),'progress_hooks': [my_hook]}
-
-format_dict={'mp3':ydl_mp3,'flv':ydl_flv,'m4a':ydl_m4a,'webm':ydl_webm,'mp4_1080':ydl_vid1080,'mp4_720':ydl_vid720,'mp4_480':ydl_vid480,'mp4_360':ydl_vid360\
-    ,'mp4_240':ydl_vid240,'mp4_144':ydl_vid144}
-
-dl_format = ""
-while not dl_format:
-    dl_format = input("Pick a format {mp3,flv,m4a,webm,mp4_1080,mp4_720,mp4_480,mp4_360,mp4_240,mp4_144} : ")
-    if not dl_format in format_dict:
+    dl_format = input("Pick a format {mp3,m4a,wav,mp4} : ")
+    while not dl_format in format_dict:
+        if dl_format == "":
+            break
         print("Invalid input. Please pick a valuable format")
-        dl_format=""
+        dl_format = input("Pick a format {mp3,m4a,wav,mp4} : ")
+    if not dl_format == "":
+        print("DOWNLOADING")
+        with youtube_dl.YoutubeDL(format_dict[dl_format]) as ydl:
+            try:
+                ydl.download(urls)
+            except:pass
+    else:
+        print("Download canceled")
+    line = input("Search for title of a vid, or a playlist:")
 
-
-
-
-with youtube_dl.YoutubeDL(format_dict[dl_format]) as ydl:
-    try:
-        ydl.download(urls)
-    except:pass
+else:
+    print("exiting...")
