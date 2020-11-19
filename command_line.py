@@ -81,13 +81,13 @@ def create_folder(folder_name):
     os.chdir(new_dir)
 
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
+youtube = build('youtube', 'v3', developerKey=api_key)
+create_folder(folder_name)
 
 line = input("Search for title of a vid, or a playlist: ")
 
 while not line == "":
-    youtube = build('youtube', 'v3', developerKey=api_key)
     urls = search_vids_n_playls(line)
-    create_folder(folder_name)
 
     dl_format = input("Pick a format {mp3,m4a,wav,mp4} : ")
     while not dl_format in format_dict:
