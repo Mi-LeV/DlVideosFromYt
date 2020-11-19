@@ -4,8 +4,14 @@ import requests
 import youtube_dl
 from googleapiclient.discovery import build
 
+## OPTIONS
+
 api_key = 'AIzaSyDXgMiUhVLW4Ls0dDnKAm_sOXc4gzRK7aQ'
 folder_name = 'music'
+max_videos_in_playlist = 20 #the limit set by youtube is 50 videos
+search_by_popularity = True
+
+## OPTIONS
 
 ydl_mp3 = {
     'format': 'bestaudio/best',
@@ -39,24 +45,26 @@ format_dict={'mp3':ydl_mp3,'m4a':ydl_m4a,'wav':ydl_wav,'mp4':ydl_mp4}
 
 
 def search_vid(word):
-    request = youtube.search().list(q=word, part='snippet', order='viewCount', maxResults=1, type='video')
+    request = youtube.search().list(q=word, part='snippet', order='viewCount' if search_by_popularity else None, maxResults=1, type='video')
     response = request.execute()
     searched_vid = "https://www.youtube.com/watch?v=" + response['items'][0]['id']['videoId']
-    print("Download " + searched_vid + response['items'][0]['snippet']['title'])
+    print("Download " + searched_vid)
+    print("video ---> " + response['items'][0]['snippet']['title'])
     return [searched_vid]
 
 def search_playlists(word):
     url_list = []
-    request = youtube.search().list(q=word, part='snippet', maxResults=1, type='playlist')
+    request = youtube.search().list(q=word, part='snippet',order='viewCount' if search_by_popularity else None, maxResults=1, type='playlist')
     response = request.execute()
     searched_playl = response['items'][0]['id']['playlistId']
-    request = youtube.playlistItems().list(part='snippet', playlistId=searched_playl, maxResults=20)
+    request = youtube.playlistItems().list(part='snippet', playlistId=searched_playl, maxResults=max_videos_in_playlist)
     response = request.execute()
     for video in response['items']:
         vid_url = "https://www.youtube.com/watch?v=" + video['snippet']['resourceId']['videoId']
         url_list.append(vid_url)
-    print(response)
-    print("Download https://www.youtube.com/playlist?list=" + searched_playl + response['items'][0]['snippet']['title'])
+    print("Download https://www.youtube.com/playlist?list=" + searched_playl)
+    for video in response['items']:
+        print("video ---> " + video['snippet']['title'])
     return url_list
 
 def search_vids_n_playls(line):

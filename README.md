@@ -21,5 +21,6 @@ Formats are downloaded in the maximum possible quality.
 
 # Requirements
 * [An API youtube v3 key without login](https://developers.google.com/youtube/registering_an_application)
+  (the api key already in the code will not work)
 * google-api-python-client and youtube_dl modules (type the command ``python -m pip install google-api-python-client`` then ``python -m pip install youtube_dl``in your terminal)
 
