@@ -1,4 +1,4 @@
-# DlMusicFromYt
+# DlVideosFromYt
 __WARNING : do NOT download music you don't own or which is not free-to-use__
 
 This is a script which allows you to download a high number of mp3 quickly from youtube videos.
