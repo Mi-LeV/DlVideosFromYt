@@ -9,7 +9,7 @@ from googleapiclient.discovery import build
 api_key = 'AIzaSyDXgMiUhVLW4Ls0dDnKAm_sOXc4gzRK7aQ'
 folder_name = 'music'
 max_videos_in_playlist = 20 #the limit set by youtube is 50 videos
-search_by_popularity = True
+search_by_popularity = False # if set to false, it will search by relevance
 
 ## OPTIONS
 
@@ -53,10 +53,13 @@ def search_vid(word):
     return [searched_vid]
 
 def search_playlists(word):
-    url_list = []
     request = youtube.search().list(q=word, part='snippet',order='viewCount' if search_by_popularity else None, maxResults=1, type='playlist')
     response = request.execute()
     searched_playl = response['items'][0]['id']['playlistId']
+    return get_from_playlist(searched_playl)
+    
+def get_from_playlist(searched_playl):
+    url_list = []
     request = youtube.playlistItems().list(part='snippet', playlistId=searched_playl, maxResults=max_videos_in_playlist)
     response = request.execute()
     for video in response['items']:
@@ -68,7 +71,11 @@ def search_playlists(word):
     return url_list
 
 def search_vids_n_playls(line):
-    if "playlist" in line:
+    if "https://www.youtube.com/playlist?list=" in line:
+        return get_from_playlist(line)
+    elif "https://www.youtube.com/watch?v=" in line:
+        return [line]
+    elif "playlist" in line:
         return search_playlists(line[line.find("playlist")+8::])
     else:
         return search_vid(line)
