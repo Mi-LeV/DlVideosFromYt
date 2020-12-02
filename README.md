@@ -15,6 +15,8 @@ The script will :
 * Download this video in the new folder
 * And ask you again for a title of a video or of a playlist...
 
+__You can now directly paste the URL of the playlist or of the video in the search prompt__
+
 **WINDOW-VERSION COMING SOON !**
 (window.py is in progress...)
 
@@ -24,5 +26,5 @@ Formats are downloaded in the maximum possible quality.
 
 # Requirements
 * [An API youtube v3 key without login](https://developers.google.com/youtube/registering_an_application)
-  (the api key already in the code will not work)
+  (the api key already in the code will not work for you)
 * google-api-python-client and youtube_dl modules (type the command ``python -m pip install google-api-python-client`` then ``python -m pip install youtube_dl``in your terminal)
