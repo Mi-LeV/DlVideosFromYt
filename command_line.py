@@ -6,7 +6,7 @@ from googleapiclient.discovery import build
 
 ## OPTIONS
 
-api_key = 'AIzaSyDXgMiUhVLW4Ls0dDnKAm_sOXc4gzRK7aQ'
+api_key = ''
 folder_name = 'music'
 max_videos_in_playlist = 20 #the limit set by youtube is 50 videos
 search_by_popularity = False # if set to false, it will search by relevance
